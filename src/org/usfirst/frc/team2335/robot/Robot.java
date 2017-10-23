@@ -1,9 +1,10 @@
 
 package org.usfirst.frc.team2335.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
+import org.usfirst.frc.team2335.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2335.robot.subsystems.Pneumatics;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,13 +19,21 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
  */
 public class Robot extends IterativeRobot
 {
+	public static final double DEADZONE = 0.15;
+	
+	public static final int LEFT_JOY_Y = 1, LEFY_JOY_X = 0;
+	public static final int SHOOT_BUTTON = 1;
+	
+	public static final int SHOOT_SOLENOID = 0;
+	
+	public static final int FRONT_LEFT_MOTOR = 2, BACK_LEFT_MOTOR = 3, FRONT_RIGHT_MOTOR = 0, BACK_RIGHT_MOTOR = 1;
+	
+	public static DriveTrain driveTrain;
+	public static Pneumatics pneumatics;
 	public static OperatorInterface oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-	
-	Compressor compressor;
-	Solenoid solenoid;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -33,6 +42,8 @@ public class Robot extends IterativeRobot
 	@Override
 	public void robotInit()
 	{
+		driveTrain = new DriveTrain();
+		pneumatics = new Pneumatics();
 		oi = new OperatorInterface();
 		//chooser.addDefault("Default Auto", new ExampleCommand());
 		//chooser.addObject("My Auto", new MyAutoCommand());
@@ -45,12 +56,14 @@ public class Robot extends IterativeRobot
 	 * the robot is disabled.
 	 */
 	@Override
-	public void disabledInit() {
+	public void disabledInit()
+	{
 
 	}
 
 	@Override
-	public void disabledPeriodic() {
+	public void disabledPeriodic()
+	{
 		Scheduler.getInstance().run();
 	}
 
@@ -66,7 +79,8 @@ public class Robot extends IterativeRobot
 	 * to the switch structure below with additional strings & commands.
 	 */
 	@Override
-	public void autonomousInit() {
+	public void autonomousInit()
+	{
 		autonomousCommand = chooser.getSelected();
 
 		/*
@@ -85,12 +99,14 @@ public class Robot extends IterativeRobot
 	 * This function is called periodically during autonomous
 	 */
 	@Override
-	public void autonomousPeriodic() {
+	public void autonomousPeriodic()
+	{
 		Scheduler.getInstance().run();
 	}
 
 	@Override
-	public void teleopInit() {
+	public void teleopInit()
+	{
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -103,7 +119,9 @@ public class Robot extends IterativeRobot
 	 * This function is called periodically during operator control
 	 */
 	@Override
-	public void teleopPeriodic() {
+	public void teleopPeriodic()
+	{
+		driveTrain.drive(oi.getAxis(LEFY_JOY_X, 1), oi.getAxis(LEFT_JOY_Y, 0.75));
 		Scheduler.getInstance().run();
 	}
 
@@ -111,7 +129,8 @@ public class Robot extends IterativeRobot
 	 * This function is called periodically during test mode
 	 */
 	@Override
-	public void testPeriodic() {
+	public void testPeriodic()
+	{
 		LiveWindow.run();
 	}
 }
