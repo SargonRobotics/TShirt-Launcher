@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.PracticeDriveTrain;
+import frc.robot.subsystems.ColorSensor
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -22,6 +23,7 @@ import frc.robot.subsystems.PracticeDriveTrain;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   final PracticeDriveTrain dt;
+  final ColorSensor cs;
   private Joystick joystick;
 
   /**
@@ -30,6 +32,8 @@ public class RobotContainer {
   public RobotContainer() {
 
     dt = new PracticeDriveTrain();
+    cs = new ColorSensor();
+
     // Configure the button bindings
     configureButtonBindings();
   }
