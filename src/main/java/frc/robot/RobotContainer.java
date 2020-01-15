@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.PracticeDriveTrain;
-import frc.robot.subsystems.ColorSensor
+import frc.robot.subsystems.ColorSensor;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
