@@ -17,5 +17,9 @@ package frc.robot;
  */
 public final class Constants 
 {
-    
+    Color redThreshold = {0.45, 0.4, 0.1 };
+    Color greenThreshold = {0.2, .55, 0.2};
+    Color blueThreshold = {0.2, 0.2, 0.3;
+    Color yellowThreshold = {0.3, 0.5, 0.2};
+
 }
